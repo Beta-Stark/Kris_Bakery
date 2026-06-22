@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kris Bakery | Repostería Artesanal | Esquipulas</title>
+    
+    <!-- Fuentes Elegantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           variables de diseño (Colores y Fuentes)
+           ========================================= */
+        :root {
+            /* Palette */
+            --primary-chocolate: #4A3121; /* Texto principal y logo */
+            --secondary-cream: #FFFAF5;     /* Fondo principal */
+            --accent-pink: #E09F9C;         /* Botones y acentos suaves */
+            --accent-pink-hover: #C6807D;   /* Hover de botones */
+            --text-dark: #333333;           /* Texto de párrafo */
+            --white: #ffffff;
+
+            /* Fonts */
+            --font-heading: 'Cormorant Garamond', serif; /* Elegante para títulos */
+            --font-body: 'Poppins', sans-serif;         /* Moderna para lectura */
+            
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 20px rgba(74, 49, 33, 0.08);
+        }
+
+        /* =========================================
+           Estilos Globales
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Desplazamiento suave entre secciones */
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--secondary-cream);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-chocolate);
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Títulos de sección centrados */
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--accent-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 50px;
+            display: block;
+        }
+
+        /* Botón Estándar */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-pink);
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-pink-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(224, 159, 156, 0.3);
+        }
+
+        /* =========================================
+           Navegación / Encabezado
+           ========================================= */
+        header {
+            background-color: rgba(255, 250, 245, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        /* Efecto de sombra al hacer scroll (JS) */
+        header.scrolled {
+            box-shadow: var(--shadow);
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* LOGO TEXTUAL ELEGANTE (CSS) */
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-chocolate);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo::before {
+            content: 'K'; /* Icono textual */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: var(--accent-pink);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-family: var(--font-body);
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            color: var(--accent-pink);
+            font-family: var(--font-body);
+            font-weight: 400;
+            margin-left: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-pink);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-chocolate);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* =========================================
+           Sección HERO (Inicio)
+           ========================================= */
+        #inicio {
+            height: 100vh;
+            background: linear-gradient(rgba(255, 250, 245, 0.7), rgba(74, 49, 33, 0.1)),
+                        url('https://images.unsplash.com/photo-1557925923-33b251d592cb?q=80&w=2070&auto=format&fit=crop') center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px; /* Espacio para el navbar */
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            color: var(--text-dark);
+            font-weight: 300;
+        }
+
+        /* =========================================
+           Sección NOSOTROS
+           ========================================= */
+        #nosotros .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .nosotros-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .nosotros-text p {
+            margin-bottom: 20px;
+        }
+
+        .nosotros-img {
+            width: 100%;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?q=80&w=2070&auto=format&fit=crop') center/cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        /* =========================================
+           Sección PRODUCTOS
+           ========================================= */
+        #productos {
+            background-color: var(--white);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--secondary-cream);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(7A, 49, 33, 0.05);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(74, 49, 33, 0.05);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            color: var(--accent-pink);
+            width: 80px; height: 80px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px auto;
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .product-card p {
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            height: 80px; /* Alineación de texto */
+        }
+
+        /* Botón secundario en tarjetas */
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent-pink);
+            border: 2px solid var(--accent-pink);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-pink);
+            color: var(--white);
+        }
+
+        /* =========================================
+           Pie de Página (FOOTER & Contacto)
+           ========================================= */
+        footer {
+            background-color: var(--primary-chocolate);
+            color: var(--secondary-cream);
+            padding: 60px 0 20px 0;
+            text-align: center;
+        }
+
+        footer h2 {
+            color: var(--secondary-cream);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-info {
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .footer-info p {
+            margin-bottom: 5px;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 250, 245, 0.1);
+            padding-top: 20px;
+        }
+
+        /* =========================================
+           Media Queries (Adaptación a Móviles)
+           ========================================= */
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 3.5rem; }
+            .section-title { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Ocultar menú en móvil - simplificación */
+            
+            #nosotros .container { grid-template-columns: 1fr; }
+            .nosotros-text h2 { text-align: center; font-size: 2.5rem; }
+            .nosotros-img { height: 300px; }
+            
+            .hero-content h1 { font-size: 2.8rem; }
+            
+            .section-title { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado y Navegación -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo">Kris<span class="logo-sub">Bakery</span></div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#productos">Creaciones</a></li>
+                    <li><a href="#contacto">Pedir</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Hero (Inicio) -->
+    <section id="inicio">
+        <div class="container hero-content">
+            <span class="section-subtitle">Repostería de Corazón</span>
+            <h1>Arte hecho pastel</h1>
+            <p>Endulzamos tus momentos especiales en Esquipulas con ingredientes seleccionados, diseño personalizado y mucho amor artesanal.</p>
+            <a href="#productos" class="btn">Explorar el Menú</a>
+        </div>
+    </section>
+
+    <!-- Sección Nosotros -->
+    <section id="nosotros">
+        <div class="container">
+            <div class="nosotros-img"></div>
+            <div class="nosotros-text">
+                <span class="section-subtitle">Nuestra Historia</span>
+                <h2>Pasión por hornear</h2>
+                <p>En Kris Bakery somos un emprendimiento familiar dedicado a crear experiencias dulces. Creemos que cada celebración merece un pastel único, hecho no solo para verse increíble, sino para saber delicioso.</    p>
+                <p>Utilizamos recetas tradicionales con un toque moderno y materias primas de la más alta calidad para garantizar frescura en cada bocado.</p>
+                <a href="#contacto" class="btn btn-outline">Contáctanos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Productos -->
+    <section id="productos">
+        <div class="container">
+            <span class="section-subtitle">Nuestras Especialidades</span>
+            <h2 class="section-title">Dulces Tentaciones</h2>
+            
+            <div class="product-grid">
+                <!-- Tarjeta 1 -->
+                <div class="product-card">
+                    <span class="card-icon">🎂</span>
+                    <h3>Pasteles</h3>
+                    <p>Diseños personalizados para bodas, cumpleaños y aniversarios. Tú lo imaginas, nosotros lo horneamos.</p>
+                    <button class="btn btn-outline order-btn" data-product="Pastel Personalizado">Cotizar</button>
+                </div>
+                <!-- Tarjeta 2 -->
+                <div class="product-card">
+                    <span class="card-icon">🧁</span>
+                    <h3>Cupcakes</h3>
+                    <p>Pequeños bocados de felicidad decorados creativamente. Ideales para mesas de dulces o regalos.</p>
+                    <button class="btn btn-outline order-btn" data-product="Caja de Cupcakes">Ordenar</button>
+                </div>
+                <!-- Tarjeta 3 -->
+                <div class="product-card">
+                    <span class="card-icon">🍪</span>
+                    <h3>Galletas</h3>
+                    <p>Galletas artesanales crujientes y suaves. Sabores clásicos y decoraciones en fondant.</p>
+                    <button class="btn btn-outline order-btn" data-product="Docena de Galletas">Ordenar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Pie de Página (Contacto) -->
+    <footer id="contacto">
+        <div class="container">
+            <span class="section-subtitle" style="color: #FFFAF5;">¿Antojo de algo dulce?</span>
+            <h2>Haz tu pedido</h2>
+            <div class="footer-info">
+                <p>📍 Esquipulas, Chiquimula</p>
+                <p>📱 WhatsApp: +502 1234 5678</p>
+                <p>⌚ Atención: Mar - Dom: 9:00 AM - 6:00 PM</p>
+            </div>
+            <a href="https://wa.me/50212345678?text=Hola%20Kris%20Bakery,%20quiero%20cotizar%20un%20pedido." target="_blank" class="btn">Enviar WhatsApp</a>
+            
+            <p class="copyright">© 2026 Kris Bakery. Todos los derechos reservados. Diseñado para emprendedores.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript para Interactividad -->
+    <script>
+        // 1. Efecto de sombra en el header al hacer scroll
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Funcionalidad de botones de Pedido (Redirigir a WhatsApp)
+        const orderButtons = document.querySelectorAll('.order-btn');
+        const WHA_NUMBER = "50212345678"; // <--- CAMBIA ESTE NÚMERO POR EL REAL
+
+        orderButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productName = e.target.getAttribute('data-product');
+                // Codificar el texto para la URL
+                const message = encodeURIComponent(`Hola Kris Bakery, me interesa obtener información y cotizar: ${productName}.`);
+                // Crear URL de WhatsApp
+                const whaUrl = `https://wa.me/${WHA_NUMBER}?text=${message}`;
+                
+                // Abrir en una nueva pestaña
+                window.open(whaUrl, '_blank');
+            });
+        });
+    </script>
+
+</body>
+</html>
